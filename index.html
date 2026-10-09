@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2E7D32">
+  <meta name="description" content="Calendario condiviso delle disponibilità">
+  <link rel="manifest" href="./manifest.json">
+  <title>Progetto con Municipio 7</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #f5f7f5;
+      color: #222;
+    }
+    header {
+      padding: 16px;
+      background: #2E7D32;
+      color: white;
+    }
+    h1 { font-size: 1.15rem; margin: 0; }
+    main { padding: 16px; }
+    p { line-height: 1.5; }
+    a {
+      color: #1b5e20;
+      overflow-wrap: anywhere;
+    }
+    .apri {
+      display: inline-block;
+      margin: 12px 0;
+      padding: 13px 18px;
+      border-radius: 8px;
+      background: #2E7D32;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    iframe {
+      display: block;
+      width: 100%;
+      height: 75vh;
+      min-height: 550px;
+      border: 0;
+      background: white;
+      border-radius: 8px;
+    }
+    .nota { font-size: .9rem; color: #555; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Progetto con Municipio 7</h1>
+  </header>
+  <main>
+    <p id="messaggio">Apertura del calendario condiviso…</p>
+    <p><a class="apri" id="linkApri" href="#">Apri il calendario</a></p>
+    <iframe id="calendario" title="Calendario delle disponibilità"
+      allow="clipboard-read; clipboard-write"></iframe>
+    <p class="nota">
+      Se il calendario non si carica, usa il pulsante per aprirlo
+      direttamente in una nuova scheda.
+    </p>
+  </main>
+  <script>
+    const APP_URL = "https://script.google.com/macros/s/AKfycbzLx-9iTExW54qXNHjaQ6Efi5u8JtL1cB3hqIpbknYU3AOahIGqMVtb-1XjUHXMeIM7/exec";
+
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("utente");
+
+    const destinazione = new URL(APP_URL);
+    if (token) destinazione.searchParams.set("utente", token);
+
+    document.getElementById("linkApri").href = destinazione.href;
+    document.getElementById("calendario").src = destinazione.href;
+
+    document.getElementById("messaggio").textContent = token
+      ? "Il tuo link personale è stato riconosciuto."
+      : "Apri il calendario usando il tuo link personale.";
+  </script>
+</body>
+</html>
