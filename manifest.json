@@ -1,0 +1,10 @@
+{
+"name": "Progetto con Municipio 7",
+"short_name": "Municipio 7",
+"description": "Calendario condiviso delle disponibilità",
+"start_url": "./",
+"scope": "./",
+"display": "standalone",
+"background_color": "#ffffff",
+"theme_color": "#2E7D32"
+}
